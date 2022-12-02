@@ -6,5 +6,5 @@ export interface ITaskProps {
 }
 
 export default function Task(props: ITaskProps) {
-	return <p className="m-0 text-start">{props.task.name}</p>;
+	return <p className="m-0 text-start">{props.task.title}</p>;
 }
