@@ -1,5 +1,7 @@
 # `Todo List`
 
+Projet du module React à Diginamic.
+
 Idée du projet : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 
 ## `Todo`
