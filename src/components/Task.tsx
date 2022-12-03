@@ -13,12 +13,12 @@ export default function Task(props: ITaskProps) {
 			<ul className="d-flex p-0">
 				<li className="">
 					<button
-						className="btn btn-sm btn-info p-0 me-2"
+						className="btn btn-sm btn-primary p-0 me-1"
 						onClick={(event: React.MouseEvent<HTMLElement>) =>
 							props.deleteTask(props.task.id)
 						}
 					>
-						<i className="text-center p-1 bi bi-pencil"></i>
+						<i className="p-1 bi bi-pencil text-white"></i>
 					</button>
 				</li>
 				<li className="">
@@ -28,7 +28,7 @@ export default function Task(props: ITaskProps) {
 							props.deleteTask(props.task.id)
 						}
 					>
-						<i className="text-center p-1 bi bi-x"></i>
+						<i className="p-1 bi bi-trash3"></i>
 					</button>
 				</li>
 			</ul>

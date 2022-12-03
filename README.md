@@ -7,7 +7,7 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 ## `Todo`
 
 -   ✅ Afficher les tâches issues du mock
--   ❌ Styliser le formulaire de création de task
+-   ✅ Styliser le formulaire de création de task
 -   ❌ CRUD
 -   ❌ Trier et filtrer les tâches
 -   ❌ Ajouter un état aux tâches (todo / done)
@@ -18,6 +18,10 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 -   ❌ Faire un vrai backend
 -   ❌ Authentification
 -   ❌ Tester
+
+### `Détails`
+
+-   Empêcher de créér plusieurs tâches avec le même titre ?
 
 ## `Task`
 
