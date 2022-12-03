@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { TaskModel } from '../assets/models/task.model';
+import { taskStatus } from '../assets/models/taskStatus.model';
 import '../assets/styles/TaskForm.css';
 
 export interface ITaskFormProps {
@@ -36,7 +37,8 @@ export default function TaskForm(props: ITaskFormProps) {
 		// Si le formulaire est valide on ajoute la task et on reset le formulaire, sinon on affiche un message d'erreur avec Bootstrap
 		if (formIsValid()) {
 			const id = crypto.randomUUID();
-			const newTask: TaskModel = { id, title };
+			const status = taskStatus.todo;
+			const newTask: TaskModel = { id, title, status };
 			props.addTask(newTask);
 			resetForm();
 			form.classList.remove('was-validated');
@@ -47,12 +49,12 @@ export default function TaskForm(props: ITaskFormProps) {
 
 	return (
 		<form
-			className="needs-validation d-flex mw-100 p-0 m-0 ms-5"
+			className="needs-validation d-flex p-0 m-0 ms-5"
 			onSubmit={handleSubmit}
 			noValidate
 		>
 			<div className="form-row d-flex">
-				<div className="col-md-4 mb-3">
+				<div className="">
 					<input
 						type="text"
 						className="form-control"
@@ -71,7 +73,7 @@ export default function TaskForm(props: ITaskFormProps) {
 					</div>
 				</div>
 				<button
-					className="btn btn-success submit-button ml-1"
+					className="btn btn-success submit-button ms-2"
 					type="submit"
 				>
 					Add

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { TaskModel } from '../assets/models/task.model';
+import { taskStatus } from '../assets/models/taskStatus.model';
 import '../assets/styles/Task.css';
 
 interface ITaskProps {
@@ -10,6 +11,7 @@ interface ITaskProps {
 export default function Task(props: ITaskProps) {
 	const [editable, setEditable] = useState(false);
 	const [title, setTitle] = useState(props.task.title);
+	const [status, setStatus] = useState(props.task.status);
 
 	const updateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setTitle(e.target.value);
@@ -34,20 +36,34 @@ export default function Task(props: ITaskProps) {
 		}
 	};
 
+	const toggleStatus = () => {
+		const newStatus =
+			status === taskStatus.done ? taskStatus.todo : taskStatus.done;
+		setStatus(newStatus);
+	};
+
 	return (
-		<div
-			className="task d-flex justify-content-between"
-			id={`task#${props.task.id}`}
-		>
-			{!editable && <p className="m-0 task__title">{title}</p>}
-			{editable && (
-				<input
-					type="text"
-					value={title}
-					onChange={updateTitle}
-					className="task__titleInput"
-				/>
-			)}
+		<div className="task d-flex justify-content-between">
+			<div className="content d-flex">
+				<div className="status me-3" onClick={toggleStatus}>
+					{status === taskStatus.done && (
+						<i className="bi bi-check-circle"></i>
+					)}
+					{status === taskStatus.todo && (
+						<i className="bi bi-circle"></i>
+					)}
+				</div>
+
+				{!editable && <p className="m-0 task__title">{title}</p>}
+				{editable && (
+					<input
+						type="text"
+						value={title}
+						onChange={updateTitle}
+						className="task__titleInput"
+					/>
+				)}
+			</div>
 
 			<ul className="d-flex p-0">
 				<li className="">
