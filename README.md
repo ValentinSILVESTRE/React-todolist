@@ -9,7 +9,7 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 -   ✅ Afficher les tâches issues du mock
 -   ✅ Styliser le formulaire de création de task
 -   ✅ CRUD
--   ❌ Ajouter un état aux tâches (todo / done)
+-   ✅ Ajouter un état aux tâches (todo / done)
 -   ❌ Ajouter une date limite
 -   ❌ Trier et filtrer les tâches
 -   ❌ Ajouter des catégories aux tâches (travail, maison, ...)
