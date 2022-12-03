@@ -8,7 +8,7 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 
 -   ✅ Afficher les tâches issues du mock
 -   ✅ Styliser le formulaire de création de task
--   ❌ CRUD
+-   ✅ CRUD
 -   ❌ Trier et filtrer les tâches
 -   ❌ Ajouter un état aux tâches (todo / done)
 -   ❌ Ajouter des catégories aux tâches (travail, maison, ...)
@@ -22,6 +22,7 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 ### `Détails`
 
 -   Empêcher de créér plusieurs tâches avec le même titre ?
+-   Quand on clique sur la modification de tache, le titre associé est sélectionné
 
 ## `Task`
 
