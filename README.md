@@ -10,10 +10,10 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 -   ✅ Styliser le formulaire de création de task
 -   ✅ CRUD
 -   ✅ Ajouter un état aux tâches (todo / done)
--   ❌ Ajouter une date limite
--   ❌ Trier et filtrer les tâches
--   ❌ Ajouter des catégories aux tâches (travail, maison, ...)
+-   ✅ Ajouter une date limite
 -   ❌ Ajouter une priorité aux tâches
+-   ❌ Ajouter des catégories aux tâches (travail, maison, ...)
+-   ❌ Trier et filtrer les tâches
 -   ❌ Ajouter une répétition
 -   ❌ Ajouter des dossiers pour regrouper les tâches
 -   ❌ Ajouter des utilisateurs

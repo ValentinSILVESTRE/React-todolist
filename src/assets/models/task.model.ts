@@ -4,4 +4,5 @@ export interface TaskModel {
 	id: string;
 	title: string;
 	status: taskStatus;
+	deadline: Date;
 }

@@ -45,7 +45,10 @@ export default function Task(props: ITaskProps) {
 	return (
 		<div className="task d-flex justify-content-between">
 			<div className="content d-flex">
-				<div className="status me-3" onClick={toggleStatus}>
+				<div
+					className="status me-3 d-flex align-items-center"
+					onClick={toggleStatus}
+				>
 					{status === taskStatus.done && (
 						<i className="bi bi-check-circle"></i>
 					)}
@@ -54,7 +57,11 @@ export default function Task(props: ITaskProps) {
 					)}
 				</div>
 
-				{!editable && <p className="m-0 task__title">{title}</p>}
+				{!editable && (
+					<p className="m-0 task__title d-flex align-items-center">
+						{title}
+					</p>
+				)}
 				{editable && (
 					<input
 						type="text"
@@ -63,6 +70,12 @@ export default function Task(props: ITaskProps) {
 						className="task__titleInput"
 					/>
 				)}
+			</div>
+
+			<div className="date">
+				<p className="d-flex align-items-center m-0">
+					{props.task.deadline.toDateString()}
+				</p>
 			</div>
 
 			<ul className="d-flex p-0">
