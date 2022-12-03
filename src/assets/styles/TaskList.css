@@ -3,7 +3,3 @@ ol {
     list-style      : none;
     background-color: rgb(194, 213, 246);
 }
-
-ul>li:nth-child(n+2) {
-    margin-top: 1rem;
-}

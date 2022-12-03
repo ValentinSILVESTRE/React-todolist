@@ -17,13 +17,21 @@ export default function TaskList(props: ITaskListProps) {
 		}
 	};
 
+	const deleteTask = (taskId: string) => {
+		// On filtre les tâches qui ont un id différent de celui passé en paramètre
+		setTaskList(taskList.filter((task) => task.id !== taskId));
+	};
+
 	return (
 		<>
 			<TaskForm addTask={addTask} />
-			<ul className="row flex-column mw-100 p-3 mt-0 m-5 shadow-sm rounded">
+			<ul className="list-group row flex-column mw-100 mt-3 m-5 shadow-sm rounded">
 				{taskList.map((task) => (
-					<li key={task.id}>
-						<Task task={task} />
+					<li
+						key={task.id}
+						className="list-group-item bg-transparent"
+					>
+						<Task task={task} deleteTask={deleteTask} />
 					</li>
 				))}
 			</ul>
