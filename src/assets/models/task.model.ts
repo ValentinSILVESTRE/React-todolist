@@ -1,3 +1,4 @@
+import { Priority } from './priority.model';
 import { taskStatus } from './taskStatus.model';
 
 export interface TaskModel {
@@ -5,4 +6,5 @@ export interface TaskModel {
 	title: string;
 	status: taskStatus;
 	deadline: Date;
+	priority: Priority;
 }

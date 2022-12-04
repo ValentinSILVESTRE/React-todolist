@@ -1,5 +1,15 @@
-.task.todo {}
-
 p {
     width: fit-content;
+}
+
+.task[data-priority='low'] .status {
+    color: goldenrod;
+}
+
+.task[data-priority='medium'] .status {
+    color: orangered;
+}
+
+.task[data-priority='high'] .status {
+    color: red;
 }

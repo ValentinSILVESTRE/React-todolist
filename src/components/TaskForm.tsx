@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Priority } from '../assets/models/priority.model';
 import { TaskModel } from '../assets/models/task.model';
 import { taskStatus } from '../assets/models/taskStatus.model';
 import '../assets/styles/TaskForm.css';
@@ -7,38 +8,53 @@ export interface ITaskFormProps {
 	addTask: Function;
 }
 
-export default function TaskForm(props: ITaskFormProps) {
-	const defaultTitle = '';
-	const defaultDeadline = new Date();
+/** - La tâche par défaut qui sert à initialiser le formulaire */
+const defaultTask: TaskModel = {
+	deadline: new Date(),
+	id: crypto.randomUUID(),
+	priority: Priority.medium,
+	status: taskStatus.todo,
+	title: '',
+};
 
-	const [title, setTitle] = useState(defaultTitle);
-	const [deadline, setDeadline] = useState(defaultDeadline);
-	const titleMinLength = 1,
-		titleMaxLength = 30;
+export default function TaskForm(props: ITaskFormProps) {
+	const [newTask, setNewTask] = useState(defaultTask);
+	const constraints = {
+		titleMinLength: 1,
+		titleMaxLength: 30,
+	};
 
 	const updateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setTitle(e.target.value);
+		setNewTask({ ...newTask, title: e.target.value });
 	};
 
 	const updateDeadline = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setDeadline(new Date(e.target.value));
+		setNewTask({ ...newTask, deadline: new Date(e.target.value) });
+	};
+
+	const updatePriority = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setNewTask({
+			...newTask,
+			priority: Priority[e.target.value as keyof typeof Priority],
+		});
 	};
 
 	/**
-	 * - Vérifie la longueure du titre
+	 * - Vérifie la longueure du titre et que la deadline ne soit pas déjà passée
 	 */
 	const formIsValid: () => boolean = () => {
 		const titleIsValid =
-			titleMinLength <= title.length && title.length <= titleMaxLength;
+			constraints.titleMinLength <= newTask.title.length &&
+			newTask.title.length <= constraints.titleMaxLength;
 		const dateIsValid =
 			new Date(new Date().toISOString().split('T')[0]).valueOf() <=
-			new Date(deadline.toISOString().split('T')[0]).valueOf();
+			new Date(newTask.deadline.toISOString().split('T')[0]).valueOf();
 		return titleIsValid && dateIsValid;
 	};
 
 	const resetForm = () => {
-		setTitle(defaultTitle);
-		setDeadline(defaultDeadline);
+		// On redéfinit un nouvel id sinon il garde l'ancien
+		setNewTask({ ...defaultTask, id: crypto.randomUUID() });
 	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,9 +65,6 @@ export default function TaskForm(props: ITaskFormProps) {
 
 		// Si le formulaire est valide on ajoute la task et on reset le formulaire, sinon on affiche un message d'erreur avec Bootstrap
 		if (formIsValid()) {
-			const id = crypto.randomUUID();
-			const status = taskStatus.todo;
-			const newTask: TaskModel = { id, title, status, deadline };
 			props.addTask(newTask);
 			resetForm();
 			form.classList.remove('was-validated');
@@ -73,15 +86,15 @@ export default function TaskForm(props: ITaskFormProps) {
 						className="form-control"
 						autoComplete="off"
 						placeholder="Title"
-						minLength={titleMinLength}
-						maxLength={titleMaxLength}
-						value={title}
+						minLength={constraints.titleMinLength}
+						maxLength={constraints.titleMaxLength}
+						value={newTask.title}
 						onChange={updateTitle}
 						required
 					/>
 					<div className="invalid-feedback">
-						The title must be between {titleMinLength} to{' '}
-						{titleMaxLength} caracters long.
+						The title must be between {constraints.titleMinLength}{' '}
+						to {constraints.titleMaxLength} caracters long.
 					</div>
 				</div>
 				<div className="me-1">
@@ -90,13 +103,26 @@ export default function TaskForm(props: ITaskFormProps) {
 						className="form-control"
 						autoComplete="off"
 						min={new Date().toISOString().split('T')[0]}
-						value={deadline.toISOString().split('T')[0]}
+						value={newTask.deadline.toISOString().split('T')[0]}
 						onChange={updateDeadline}
 						required
 					/>
 					<div className="invalid-feedback">
 						You can't create a past task.
 					</div>
+				</div>
+				<div className="me-1">
+					<select
+						name="priority"
+						id="priority"
+						className="form-control"
+						value={newTask.priority}
+						onChange={updatePriority}
+					>
+						<option value="low">Low</option>
+						<option value="medium">Medium</option>
+						<option value="high">High</option>
+					</select>
 				</div>
 				<button className="btn btn-success submit-button" type="submit">
 					Add

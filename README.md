@@ -11,7 +11,8 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 -   ✅ CRUD
 -   ✅ Ajouter un état aux tâches (todo / done)
 -   ✅ Ajouter une date limite
--   ❌ Ajouter une priorité aux tâches
+-   ✅ Ajouter une priorité aux tâches
+-   ❌ Faire un vrai formulaire
 -   ❌ Ajouter des catégories aux tâches (travail, maison, ...)
 -   ❌ Trier et filtrer les tâches
 -   ❌ Ajouter une répétition
@@ -23,8 +24,9 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 
 ### `Détails`
 
--   Empêcher de créér plusieurs tâches avec le même titre ?
--   Quand on clique sur la modification de tache, le titre associé est sélectionné
+-   ❌ Faire un footer
+-   ❌ Empêcher de créér plusieurs tâches avec le même titre ?
+-   ❌ Quand on clique sur la modification de tache, le titre associé est sélectionné
 
 ## `Task`
 

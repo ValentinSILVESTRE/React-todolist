@@ -43,8 +43,11 @@ export default function Task(props: ITaskProps) {
 	};
 
 	return (
-		<div className="task d-flex justify-content-between">
-			<div className="content d-flex">
+		<div
+			className="task d-flex justify-content-between row mx-0"
+			data-priority={props.task.priority}
+		>
+			<div className="content d-flex col-5">
 				<div
 					className="status me-3 d-flex align-items-center"
 					onClick={toggleStatus}
@@ -72,13 +75,13 @@ export default function Task(props: ITaskProps) {
 				)}
 			</div>
 
-			<div className="date">
+			<div className="date col-5">
 				<p className="d-flex align-items-center m-0">
 					{props.task.deadline.toDateString()}
 				</p>
 			</div>
 
-			<ul className="d-flex p-0">
+			<ul className="d-flex justify-content-end p-0 col-2">
 				<li className="">
 					<button
 						className="btn btn-sm btn-primary p-0 me-1"
