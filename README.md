@@ -12,19 +12,23 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 -   ✅ Ajouter un état aux tâches (todo / done)
 -   ✅ Ajouter une date limite
 -   ✅ Ajouter une priorité aux tâches
--   ❌ Faire un vrai formulaire
+-   ❌ Trier les tâches par date puis priorité
+-   ❌ Faire un joli formulaire
 -   ❌ Ajouter des catégories aux tâches (travail, maison, ...)
 -   ❌ Trier et filtrer les tâches
--   ❌ Ajouter une répétition
+-   ❌ Permettre les tâches quotidiennes
 -   ❌ Ajouter des dossiers pour regrouper les tâches
 -   ❌ Ajouter des utilisateurs
 -   ❌ Faire un vrai backend
 -   ❌ Authentification
 -   ❌ Tester
+-   ❌ Responsive
 
 ### `Détails`
 
--   ❌ Faire un footer
+-   ❌ Modifier l'icone du crayon quand on est en mode edit
+-   ✅ Faire un footer
+-   ❌ Faire un composant TaskEdit différent de Task et faire passer les données depuis le parent
 -   ❌ Empêcher de créér plusieurs tâches avec le même titre ?
 -   ❌ Quand on clique sur la modification de tache, le titre associé est sélectionné
 
