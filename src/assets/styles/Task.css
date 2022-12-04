@@ -13,3 +13,8 @@ p {
 .task[data-priority='high'] .status {
     color: red;
 }
+
+.cta-buttons button {
+    width : 30px;
+    height: 30px;
+}

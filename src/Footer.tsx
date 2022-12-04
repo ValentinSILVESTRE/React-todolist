@@ -1,8 +1,9 @@
 export default function Footer() {
 	return (
-		<footer className="mt-55">
+		<footer className="ms-5">
 			<address>
-				You can visit my website{' '}
+				Created by{' '}
+				<span className="fst-italic">Valentin SILVESTRE</span> -{' '}
 				<a
 					target="_blank"
 					href="https://www.valentin-silvestre.com/"

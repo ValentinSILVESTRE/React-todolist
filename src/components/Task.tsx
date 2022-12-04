@@ -114,10 +114,12 @@ export default function Task(props: ITaskProps) {
 				)}
 			</div>
 
-			<ul className="d-flex justify-content-end p-0 col-2">
+			<ul className="d-flex justify-content-end p-0 col-2 cta-buttons">
 				<li className="">
 					<button
-						className="btn btn-sm btn-primary p-0 me-1"
+						className={`btn btn-sm p-0 me-1 ${
+							editable ? 'btn-success' : 'btn-primary'
+						}`}
 						onClick={onUpdateTask}
 					>
 						{!editable && (

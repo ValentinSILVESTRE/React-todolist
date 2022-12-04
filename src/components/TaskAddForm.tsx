@@ -75,7 +75,7 @@ export default function TaskAddForm(props: ITaskAddFormProps) {
 
 	return (
 		<form
-			className="needs-validation d-flex p-0 m-0 ms-5"
+			className="needs-validation d-flex p-0 m-0"
 			onSubmit={handleSubmit}
 			noValidate
 		>

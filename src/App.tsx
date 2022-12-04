@@ -6,13 +6,32 @@ import './assets/styles/App.css';
 import TaskAddForm from './components/TaskAddForm';
 import TaskList from './components/TaskList';
 
+const taskIsBefore = (taskA: TaskModel, taskB: TaskModel) => {
+	const dateA = new Date(
+		taskA.deadline.toISOString().split('T')[0]
+	).valueOf();
+	const dateB = new Date(
+		taskB.deadline.toISOString().split('T')[0]
+	).valueOf();
+
+	// Si les dates sont sont différentes, alors on renvoie la première
+	if (dateA !== dateB) return dateA - dateB;
+
+	// On renvoie celle qui a un titre inférieur alphabétiquement
+	return taskA.title.toUpperCase() < taskB.title.toUpperCase() ? -1 : 1;
+};
+
 function App() {
-	const [taskList, setTaskList] = useState([...MockTasks]);
+	const [taskList, setTaskList] = useState(
+		[...MockTasks].sort((t1, t2) => taskIsBefore(t1, t2))
+	);
 
 	const addTask = (newTask: TaskModel) => {
 		// Si l'id de la nouvelle tâche est inconnu, alors on l'ajoute
 		if (taskList.find((task) => task.id === newTask.id) === undefined) {
-			setTaskList([...taskList, newTask]);
+			setTaskList(
+				[...taskList, newTask].sort((t1, t2) => taskIsBefore(t1, t2))
+			);
 		}
 	};
 
@@ -26,7 +45,7 @@ function App() {
 		filteredTasks.push(updatedTask);
 
 		// On persiste les changements
-		setTaskList(filteredTasks);
+		setTaskList(filteredTasks.sort((t1, t2) => taskIsBefore(t1, t2)));
 	};
 
 	const deleteTask = (id: string) => {
@@ -35,10 +54,10 @@ function App() {
 	};
 
 	return (
-		<main className="App">
+		<main className="App mt-3 m-5">
 			<TaskAddForm onSubmit={addTask} />
 
-			<h2>Todo tasks</h2>
+			<h2>Todo</h2>
 			<TaskList
 				tasks={taskList.filter(
 					(task) => task.status === taskStatus.todo
@@ -47,7 +66,7 @@ function App() {
 				deleteTask={deleteTask}
 			/>
 
-			<h2>Done tasks</h2>
+			<h2>Done</h2>
 			<TaskList
 				tasks={taskList.filter(
 					(task) => task.status === taskStatus.done

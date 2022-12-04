@@ -12,7 +12,7 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 -   ✅ Ajouter un état aux tâches (todo / done)
 -   ✅ Ajouter une date limite
 -   ✅ Ajouter une priorité aux tâches
--   ❌ Trier les tâches par date puis priorité
+-   ✅ Trier les tâches par date puis ❌ priorité
 -   ❌ Faire un joli formulaire
 -   ❌ Ajouter des catégories aux tâches (travail, maison, ...)
 -   ❌ Trier et filtrer les tâches
@@ -26,18 +26,17 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 
 ### `Détails`
 
--   ❌ Modifier l'icone du crayon quand on est en mode edit
+-   ✅ Modifier l'icone du crayon quand on est en mode edit
 -   ✅ Faire un footer
 -   ❌ Faire un composant TaskEdit différent de Task et faire passer les données depuis le parent
 -   ❌ Empêcher de créér plusieurs tâches avec le même titre ?
--   ❌ Quand on clique sur la modification de tache, le titre associé est sélectionné
 
 ## `Task`
 
 -   id : string
 -   title : string
 -   content : string
--   endDate : Date
+-   deadline : Date
 -   startDate? : Date
 -   priority : high | medium | low
 -   author : User
