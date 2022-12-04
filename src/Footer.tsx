@@ -3,7 +3,11 @@ export default function Footer() {
 		<footer className="mt-55">
 			<address>
 				You can visit my website{' '}
-				<a href="https://www.valentin-silvestre.com/">
+				<a
+					target="_blank"
+					href="https://www.valentin-silvestre.com/"
+					rel="noreferrer"
+				>
 					www.valentin-silvestre.com
 				</a>
 			</address>

@@ -4,8 +4,8 @@ import { TaskModel } from '../assets/models/task.model';
 import { taskStatus } from '../assets/models/taskStatus.model';
 import '../assets/styles/TaskForm.css';
 
-export interface ITaskFormProps {
-	addTask: Function;
+export interface ITaskAddFormProps {
+	onSubmit: Function;
 }
 
 /** - La tâche par défaut qui sert à initialiser le formulaire */
@@ -17,7 +17,7 @@ const defaultTask: TaskModel = {
 	title: '',
 };
 
-export default function TaskForm(props: ITaskFormProps) {
+export default function TaskAddForm(props: ITaskAddFormProps) {
 	const [newTask, setNewTask] = useState(defaultTask);
 	const constraints = {
 		titleMinLength: 1,
@@ -65,7 +65,7 @@ export default function TaskForm(props: ITaskFormProps) {
 
 		// Si le formulaire est valide on ajoute la task et on reset le formulaire, sinon on affiche un message d'erreur avec Bootstrap
 		if (formIsValid()) {
-			props.addTask(newTask);
+			props.onSubmit(newTask);
 			resetForm();
 			form.classList.remove('was-validated');
 		} else {

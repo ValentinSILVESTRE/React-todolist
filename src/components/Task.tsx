@@ -6,6 +6,7 @@ import '../assets/styles/Task.css';
 
 interface ITaskProps {
 	task: TaskModel;
+	updateTask: Function;
 	deleteTask: Function;
 }
 
@@ -13,44 +14,34 @@ export default function Task(props: ITaskProps) {
 	const [editable, setEditable] = useState(false);
 	const [task, setTask] = useState(props.task);
 
-	const updateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setTask({ ...task, title: e.target.value });
-	};
-
-	const updateDeadline = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setTask({ ...task, deadline: new Date(e.target.value) });
-	};
-
-	const updatePriority = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		setTask({
-			...task,
-			priority: Priority[e.target.value as keyof typeof Priority],
-		});
-	};
-
 	const toggleEditable = () => {
 		setEditable(!editable);
-	};
-
-	const onModifyTaskClick = (event: React.MouseEvent<HTMLElement>) => {
-		toggleEditable();
-
-		// todo - Sélectionner le texte de l'input
-		if (false && editable) {
-			const HTMLTaskID = `task#${props.task.id}`;
-			const HTMLTitleInput: HTMLInputElement = document
-				.getElementById(HTMLTaskID)!
-				.getElementsByClassName(
-					'task__titleInput'
-				)[0] as HTMLInputElement;
-			HTMLTitleInput.select();
-		}
 	};
 
 	const toggleStatus = () => {
 		const status =
 			task.status === taskStatus.done ? taskStatus.todo : taskStatus.done;
-		setTask({ ...task, status });
+		props.updateTask({ ...task, status });
+	};
+
+	const updatePriority = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const priority = Priority[e.target.value as keyof typeof Priority];
+		setTask({ ...task, priority });
+	};
+
+	const updateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const title = e.target.value;
+		setTask({ ...task, title });
+	};
+
+	const updateDeadline = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const deadline = new Date(e.target.value);
+		setTask({ ...task, deadline });
+	};
+
+	const onUpdateTask = () => {
+		props.updateTask(task);
+		toggleEditable();
 	};
 
 	return (
@@ -127,9 +118,12 @@ export default function Task(props: ITaskProps) {
 				<li className="">
 					<button
 						className="btn btn-sm btn-primary p-0 me-1"
-						onClick={onModifyTaskClick}
+						onClick={onUpdateTask}
 					>
-						<i className="p-1 bi bi-pencil text-white"></i>
+						{!editable && (
+							<i className="p-1 bi bi-pencil text-white"></i>
+						)}
+						{editable && <i className="bi bi-check-lg"></i>}
 					</button>
 				</li>
 				<li className="">
