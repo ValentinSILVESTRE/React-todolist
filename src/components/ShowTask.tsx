@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { TaskModel } from '../assets/models/task.model';
 import { taskStatus } from '../assets/models/taskStatus.model';
 import '../assets/styles/Task.css';
@@ -11,12 +10,6 @@ interface IShowTaskProps {
 }
 
 export default function ShowTask(props: IShowTaskProps) {
-	const [editable, setEditable] = useState(false);
-
-	// const toggleEditable = () => {
-	// 	setEditable(!editable);
-	// };
-
 	const toggleStatus = () => {
 		const status =
 			props.task.status === taskStatus.done
@@ -25,17 +18,12 @@ export default function ShowTask(props: IShowTaskProps) {
 		props.updateTask({ ...props.task, status });
 	};
 
-	// const onUpdateTask = () => {
-	// 	props.updateTask(props.task);
-	// 	toggleEditable();
-	// };
-
 	return (
 		<div
 			className="task d-flex justify-content-between row mx-0 align-items-center"
 			data-priority={props.task.priority}
 		>
-			<div className="content d-flex col justify-content-between">
+			<div className="content d-flex col">
 				<div
 					className="status me-3 d-flex align-items-center"
 					onClick={toggleStatus}
@@ -52,7 +40,7 @@ export default function ShowTask(props: IShowTaskProps) {
 					{props.task.title}
 				</p>
 
-				<div className="date col-5 d-flex justify-content-end">
+				<div className="date col-5 d-flex justify-content-end ms-auto">
 					<p className="d-flex align-items-center m-0">
 						{props.task.deadline.toDateString()}
 					</p>

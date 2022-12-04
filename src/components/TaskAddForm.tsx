@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Priority } from '../assets/models/priority.model';
 import { TaskModel } from '../assets/models/task.model';
 import { taskStatus } from '../assets/models/taskStatus.model';
+import '../assets/styles/TaskAddForm.css';
 import '../assets/styles/TaskForm.css';
 
 export interface ITaskAddFormProps {
@@ -111,18 +112,23 @@ export default function TaskAddForm(props: ITaskAddFormProps) {
 						You can't create a past task.
 					</div>
 				</div>
-				<select
-					name="priority"
-					id="priority"
-					className="form-select me-1"
-					value={newTask.priority}
-					onChange={updatePriority}
+				<div className="form-control p-0 select-control">
+					<select
+						name="priority"
+						id="priority"
+						className="form-select me-1"
+						value={newTask.priority}
+						onChange={updatePriority}
+					>
+						<option value="low">Low</option>
+						<option value="medium">Medium</option>
+						<option value="high">High</option>
+					</select>
+				</div>
+				<button
+					className="ms-1 btn btn-success submit-button"
+					type="submit"
 				>
-					<option value="low">Low</option>
-					<option value="medium">Medium</option>
-					<option value="high">High</option>
-				</select>
-				<button className="btn btn-success submit-button" type="submit">
 					Add
 				</button>
 			</div>
