@@ -13,7 +13,7 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 -   ✅ Ajouter une date limite
 -   ✅ Ajouter une priorité aux tâches
 -   ✅ Trier les tâches par date puis ❌ priorité
--   ❌ Faire un joli formulaire
+-   ✅ Faire un joli formulaire
 -   ❌ Ajouter des catégories aux tâches (travail, maison, ...)
 -   ❌ Trier et filtrer les tâches
 -   ❌ Permettre les tâches quotidiennes
@@ -28,7 +28,7 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 
 -   ✅ Modifier l'icone du crayon quand on est en mode edit
 -   ✅ Faire un footer
--   ❌ Faire un composant TaskEdit différent de Task et faire passer les données depuis le parent
+-   ✅ Faire un composant TaskEdit différent de Task et faire passer les données depuis le parent
 -   ❌ Empêcher de créér plusieurs tâches avec le même titre ?
 
 ## `Task`

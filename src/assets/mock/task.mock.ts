@@ -5,7 +5,7 @@ import { taskStatus } from '../models/taskStatus.model';
 
 // * Création de quelques tâches avec un id aléatoire
 
-const taskCount = 3;
+const taskCount = 10;
 const taskStatusCount = 2;
 const priorityCount = 3;
 

@@ -36,12 +36,12 @@ function App() {
 	};
 
 	const updateTask = (updatedTask: TaskModel) => {
-		// On filtre les tasks qui ont un id différent de celui qu'on veut modifier
+		// On filtre les tâches qui ont un id différent de celle qu'on veut modifier
 		const filteredTasks = taskList.filter(
 			(task) => task.id !== updatedTask.id
 		);
 
-		// On y ajoute la task modifiée
+		// On y ajoute la tâche modifiée
 		filteredTasks.push(updatedTask);
 
 		// On persiste les changements
