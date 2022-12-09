@@ -127,14 +127,20 @@ function App() {
 
 	return (
 		<main className="App mt-3 m-5">
-			<TaskAddForm onSubmit={addTask} />
+			<div className="d-flex">
+				<TaskAddForm onSubmit={addTask} />
 
-			<div
-				id="sortFilterContainer"
-				className="row m-3 border p-3 rounded"
-			>
-				<FilterForm query={query} updateQuery={updateQuery} />
-				<SortForm sortKey={getMainSortKey()} updateSort={updateSort} />
+				<div
+					id="sortFilterContainer"
+					className="row m-3 border p-3 rounded mx-auto"
+					style={{ height: 'fit-content' }}
+				>
+					<FilterForm query={query} updateQuery={updateQuery} />
+					<SortForm
+						sortKey={getMainSortKey()}
+						updateSort={updateSort}
+					/>
+				</div>
 			</div>
 
 			{query.length > 0 && (

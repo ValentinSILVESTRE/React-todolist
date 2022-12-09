@@ -13,10 +13,21 @@ export default function SortForm(props: ISortFormProps) {
 	};
 
 	return (
-		<select name="sort" id="sort" value={sortKey} onChange={updateSort}>
-			<option value="deadline">Deadline</option>
-			<option value="priority">Priority</option>
-			<option value="title">Title</option>
-		</select>
+		<div className="d-flex mt-3">
+			<label htmlFor="sort" className="me-2">
+				Sort by
+			</label>
+			<select
+				name="sort"
+				id="sort"
+				value={sortKey}
+				onChange={updateSort}
+				style={{ height: 'fit-content' }}
+			>
+				<option value="deadline">Deadline</option>
+				<option value="priority">Priority</option>
+				<option value="title">Title</option>
+			</select>
+		</div>
 	);
 }

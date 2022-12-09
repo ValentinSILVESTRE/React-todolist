@@ -12,6 +12,8 @@ export default function FilterForm(props: IFilterFormProps) {
 		<input
 			type="text"
 			placeholder="Search"
+			className=""
+			style={{ height: 'fit-content' }}
 			value={props.query}
 			onChange={updateQuery}
 		/>
