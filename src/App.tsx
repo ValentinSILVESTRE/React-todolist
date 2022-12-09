@@ -97,11 +97,24 @@ function App() {
 		}
 	};
 
+	const todoTaskCount: () => number = () => {
+		return taskList.filter((task) => task.status === taskStatus.todo)
+			.length;
+	};
+
+	const doneTaskCount: () => number = () => {
+		return taskList.filter((task) => task.status === taskStatus.done)
+			.length;
+	};
+
 	return (
 		<main className="App mt-3 m-5">
 			<TaskAddForm onSubmit={addTask} />
 
-			<h2>Todo</h2>
+			<h2>
+				{todoTaskCount() || 'No'} task{todoTaskCount() !== 1 && 's'} to
+				do
+			</h2>
 			<TaskList
 				tasks={taskList.filter(
 					(task) => task.status === taskStatus.todo
@@ -110,7 +123,10 @@ function App() {
 				deleteTask={deleteTask}
 			/>
 
-			<h2>Done</h2>
+			<h2>
+				{doneTaskCount() || 'No'} task{doneTaskCount() !== 1 && 's'}{' '}
+				done
+			</h2>
 			<TaskList
 				tasks={taskList.filter(
 					(task) => task.status === taskStatus.done
