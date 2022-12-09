@@ -1,3 +1,7 @@
 .select-control {
     height: fit-content;
 }
+
+form#createForm input[type=date] {
+    width: auto;
+}

@@ -76,29 +76,43 @@ export default function TaskAddForm(props: ITaskAddFormProps) {
 
 	return (
 		<form
-			className="needs-validation d-flex p-0 m-0"
+			className="needs-validation d-flex p-0 m-0 w-50 border p-4 shadow mx-auto flex-column"
 			onSubmit={handleSubmit}
 			noValidate
+			id="createForm"
 		>
-			<div className="form-row d-flex">
-				<div className="me-1">
-					<input
-						type="text"
-						className="form-control"
-						autoComplete="off"
-						placeholder="Title"
-						minLength={constraints.titleMinLength}
-						maxLength={constraints.titleMaxLength}
-						value={newTask.title}
-						onChange={updateTitle}
-						required
-					/>
-					<div className="invalid-feedback">
-						The title must be between {constraints.titleMinLength}{' '}
-						to {constraints.titleMaxLength} caracters long.
+			<h2 className="text-center mb-4">New task</h2>
+			<div className="d-flex col flex-column">
+				<div className="form-group col d-flex align-items-center mb-2 justify-content-between">
+					<label htmlFor="title" className="me-1 col-3">
+						Title
+					</label>
+
+					<div className="d-flex flex-column w-100 p-0">
+						<input
+							type="text"
+							className="form-control"
+							autoComplete="off"
+							placeholder="Title"
+							minLength={constraints.titleMinLength}
+							maxLength={constraints.titleMaxLength}
+							value={newTask.title}
+							onChange={updateTitle}
+							required
+						/>
+						<div className="invalid-feedback col-9">
+							The title must be between{' '}
+							{constraints.titleMinLength} to{' '}
+							{constraints.titleMaxLength} caracters long.
+						</div>
 					</div>
 				</div>
-				<div className="me-1">
+
+				<div className="form-group col d-flex align-items-center mb-2 justify-content-between">
+					<label htmlFor="date" className="me-1 col-3">
+						Deadline
+					</label>
+
 					<input
 						type="date"
 						className="form-control"
@@ -112,21 +126,29 @@ export default function TaskAddForm(props: ITaskAddFormProps) {
 						You can't create a past task.
 					</div>
 				</div>
-				<div className="form-control p-0 select-control">
-					<select
-						name="priority"
-						id="priority"
-						className="form-select me-1"
-						value={newTask.priority}
-						onChange={updatePriority}
-					>
-						<option value="low">Low</option>
-						<option value="medium">Medium</option>
-						<option value="high">High</option>
-					</select>
+
+				<div className="form-group col d-flex align-items-center mb-2 justify-content-between">
+					<label htmlFor="priority" className="me-1 col-3">
+						Priority
+					</label>
+
+					<div className="form-control p-0 select-control">
+						<select
+							name="priority"
+							id="priority"
+							className="form-select me-1"
+							value={newTask.priority}
+							onChange={updatePriority}
+						>
+							<option value="low">Low</option>
+							<option value="medium">Medium</option>
+							<option value="high">High</option>
+						</select>
+					</div>
 				</div>
+
 				<button
-					className="ms-1 btn btn-success submit-button"
+					className="btn btn-success submit-button col-4 align-self-center"
 					type="submit"
 				>
 					Add

@@ -41,6 +41,34 @@ export default function EditTask(props: IEditTaskProps) {
 		>
 			<div className="content d-flex col flex-column">
 				<div className="form-group row d-flex align-items-center mb-2 justify-content-between">
+					<label htmlFor="title" className="me-1 col-3">
+						Title
+					</label>
+					<input
+						id="title"
+						type="text"
+						value={task.title}
+						onChange={updateTitle}
+						className="task__titleInput col"
+					/>
+				</div>
+
+				<div className="date form-group row d-flex align-items-center mb-2 justify-content-between">
+					<label htmlFor="date" className="me-1 col-3">
+						Deadline
+					</label>
+					<input
+						type="date"
+						className="form-control col"
+						autoComplete="off"
+						min={new Date().toISOString().split('T')[0]}
+						value={task.deadline.toISOString().split('T')[0]}
+						onChange={updateDeadline}
+						required
+					/>
+				</div>
+
+				<div className="form-group row d-flex align-items-center justify-content-between">
 					<label htmlFor="priority" className="me-1 col-3">
 						Priority
 					</label>
@@ -55,34 +83,6 @@ export default function EditTask(props: IEditTaskProps) {
 						<option value="medium">Medium</option>
 						<option value="high">High</option>
 					</select>
-				</div>
-
-				<div className="form-group row d-flex align-items-center mb-2 justify-content-between">
-					<label htmlFor="title" className="me-1 col-3">
-						Title
-					</label>
-					<input
-						id="title"
-						type="text"
-						value={task.title}
-						onChange={updateTitle}
-						className="task__titleInput col"
-					/>
-				</div>
-
-				<div className="date form-group row d-flex align-items-center justify-content-between">
-					<label htmlFor="date" className="me-1 col-3">
-						Deadline
-					</label>
-					<input
-						type="date"
-						className="form-control col"
-						autoComplete="off"
-						min={new Date().toISOString().split('T')[0]}
-						value={task.deadline.toISOString().split('T')[0]}
-						onChange={updateDeadline}
-						required
-					/>
 				</div>
 			</div>
 

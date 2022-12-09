@@ -1,12 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MockTasks from './assets/mock/task.mock';
+import Sort from './assets/models/sort.model';
 import { TaskModel } from './assets/models/task.model';
 import { taskStatus } from './assets/models/taskStatus.model';
 import './assets/styles/App.css';
+import SortForm from './components/SortForm';
+import Order from './components/SortForm';
 import TaskAddForm from './components/TaskAddForm';
 import TaskList from './components/TaskList';
 
-const taskIsBefore = (taskA: TaskModel, taskB: TaskModel) => {
+const taskIsBefore = (taskA: TaskModel, taskB: TaskModel, sort: Sort) => {
+	/** Liste des clées triée par priority */
+	const sortedKeys = Object.keys(sort).sort((keyA, keyB) => {
+		return (
+			sort[keyB as keyof Sort].priority -
+			sort[keyA as keyof Sort].priority
+		);
+	});
+
+	// On veut une liste
+
 	const dateA = new Date(
 		taskA.deadline.toISOString().split('T')[0]
 	).valueOf();
@@ -21,16 +34,45 @@ const taskIsBefore = (taskA: TaskModel, taskB: TaskModel) => {
 	return taskA.title.toUpperCase() < taskB.title.toUpperCase() ? -1 : 1;
 };
 
+const defaultSort: Sort = {
+	id: { order: 'asc', priority: 0 },
+	deadline: { order: 'asc', priority: 4 },
+	priority: { order: 'desc', priority: 3 },
+	title: { order: 'asc', priority: 2 },
+	status: { order: 'asc', priority: 1 },
+};
+
 function App() {
-	const [taskList, setTaskList] = useState(
-		[...MockTasks].sort((t1, t2) => taskIsBefore(t1, t2))
-	);
+	const [sort, setSort] = useState(defaultSort);
+	const [taskList, setTaskList] = useState(MockTasks);
+
+	useEffect(() => {
+		console.log('UseEffect');
+		// * On tri la liste des tâches
+		const sortEntries = Object.entries(sort);
+		// setTaskList(taskList.sort((t1, t2) => taskIsBefore(t1, t2, sort)));
+		const sortEntriesSorted = sortEntries.sort(
+			(a, b) => b[1].priority - a[1].priority
+		);
+		const sortedKeyList = sortEntriesSorted.map(
+			(data: [string, { order: typeof Order; priority: number }]) => {
+				return { key: data[0], order: data[1].order };
+			}
+		);
+
+		console.table(sortedKeyList);
+
+		// todo
+		// * 1) Trier les tâches par "key" de sortedKeyList dans l'ordre "order" de la première à la dernière si égalité
+	});
 
 	const addTask = (newTask: TaskModel) => {
 		// Si l'id de la nouvelle tâche est inconnu, alors on l'ajoute
 		if (taskList.find((task) => task.id === newTask.id) === undefined) {
 			setTaskList(
-				[...taskList, newTask].sort((t1, t2) => taskIsBefore(t1, t2))
+				[...taskList, newTask].sort((t1, t2) =>
+					taskIsBefore(t1, t2, sort)
+				)
 			);
 		}
 	};
@@ -45,12 +87,14 @@ function App() {
 		filteredTasks.push(updatedTask);
 
 		// On persiste les changements
-		setTaskList(filteredTasks.sort((t1, t2) => taskIsBefore(t1, t2)));
+		setTaskList(filteredTasks.sort((t1, t2) => taskIsBefore(t1, t2, sort)));
 	};
 
 	const deleteTask = (id: string) => {
-		// On filtre les tâches qui ont un id différent de celui passé en paramètre
-		setTaskList(taskList.filter((task) => task.id !== id));
+		if (window.confirm('Are you sure you want to delete this task ?')) {
+			// On filtre les tâches qui ont un id différent de celui passé en paramètre
+			setTaskList(taskList.filter((task) => task.id !== id));
+		}
 	};
 
 	return (

@@ -14,8 +14,8 @@ Inspiration : [Youtube](https://www.youtube.com/watch?v=8ZKq0r-g87M)
 -   ✅ Ajouter une priorité aux tâches
 -   ✅ Trier les tâches par date puis ❌ priorité
 -   ✅ Faire un joli formulaire
--   ❌ Ajouter des catégories aux tâches (travail, maison, ...)
 -   ❌ Trier et filtrer les tâches
+-   ❌ Ajouter des catégories aux tâches (travail, maison, ...)
 -   ❌ Permettre les tâches quotidiennes
 -   ❌ Ajouter des dossiers pour regrouper les tâches
 -   ❌ Ajouter des utilisateurs
