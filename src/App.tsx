@@ -1,46 +1,23 @@
 import { useEffect, useState } from 'react';
+import { taskIsBefore } from './assets/functions/taskIsBefore.function';
 import MockTasks from './assets/mock/task.mock';
-import Sort from './assets/models/sort.model';
+import Sort, { _Order } from './assets/models/sort.model';
 import { TaskModel } from './assets/models/task.model';
 import { taskStatus } from './assets/models/taskStatus.model';
 import './assets/styles/App.css';
 import FilterForm from './components/FilterForm';
 import SortForm from './components/SortForm';
-import Order from './components/SortForm';
 import TaskAddForm from './components/TaskAddForm';
 import TaskList from './components/TaskList';
 
-const taskIsBefore = (taskA: TaskModel, taskB: TaskModel, sort: Sort) => {
-	/** Liste des clées triée par priority */
-	const sortedKeys = Object.keys(sort).sort((keyA, keyB) => {
-		return (
-			sort[keyB as keyof Sort].priority -
-			sort[keyA as keyof Sort].priority
-		);
-	});
-
-	// On veut une liste
-
-	const dateA = new Date(
-		taskA.deadline.toISOString().split('T')[0]
-	).valueOf();
-	const dateB = new Date(
-		taskB.deadline.toISOString().split('T')[0]
-	).valueOf();
-
-	// Si les dates sont sont différentes, alors on renvoie la première
-	if (dateA !== dateB) return dateA - dateB;
-
-	// On renvoie celle qui a un titre inférieur alphabétiquement
-	return taskA.title.toUpperCase() < taskB.title.toUpperCase() ? -1 : 1;
-};
+type sortKey = 'deadline' | 'title' | 'priority';
 
 const defaultSort: Sort = {
-	id: { order: 'asc', priority: 0 },
 	deadline: { order: 'asc', priority: 4 },
 	priority: { order: 'desc', priority: 3 },
 	title: { order: 'asc', priority: 2 },
 	status: { order: 'asc', priority: 1 },
+	id: { order: 'asc', priority: 0 },
 };
 const defaultQuery = '';
 
@@ -50,24 +27,11 @@ function App() {
 	const [query, setQuery] = useState(defaultQuery);
 
 	useEffect(() => {
-		// console.log('UseEffect');
 		// * On tri la liste des tâches
-		const sortEntries = Object.entries(sort);
-		// setTaskList(taskList.sort((t1, t2) => taskIsBefore(t1, t2, sort)));
-		const sortEntriesSorted = sortEntries.sort(
-			(a, b) => b[1].priority - a[1].priority
+		setTaskList(
+			taskList.sort((taskA, taskB) => taskIsBefore(taskA, taskB, sort))
 		);
-		const sortedKeyList = sortEntriesSorted.map(
-			(data: [string, { order: typeof Order; priority: number }]) => {
-				return { key: data[0], order: data[1].order };
-			}
-		);
-
-		// console.table(sortedKeyList);
-
-		// todo
-		// * 1) Trier les tâches par "key" de sortedKeyList dans l'ordre "order" de la première à la dernière si égalité
-	});
+	}, []);
 
 	// * Modification de la liste des tâches quand la query est modifiée
 	useEffect(() => {
@@ -76,6 +40,14 @@ function App() {
 		);
 		setTaskList(filteredTasks);
 	}, [query]);
+
+	// * Modification de la liste des tâches quand la query est modifiée
+	useEffect(() => {
+		// * On tri la liste des tâches
+		setTaskList(
+			taskList.sort((taskA, taskB) => taskIsBefore(taskA, taskB, sort))
+		);
+	}, [sort]);
 
 	const addTask = (newTask: TaskModel) => {
 		// Si l'id de la nouvelle tâche est inconnu, alors on l'ajoute
@@ -122,12 +94,47 @@ function App() {
 		setQuery(newQuery);
 	};
 
+	const getMainSortKey: () => sortKey = () => {
+		const max = {
+			key: Object.entries(sort)[0][0] as string,
+			priority: Object.entries(sort)[0][1].priority as number,
+		};
+
+		for (let i = 1; i < Object.entries(sort).length; i++) {
+			const data = Object.entries(sort)[i];
+			if (data[1].priority > max.priority) {
+				max.key = data[0];
+				max.priority = data[1].priority;
+			}
+		}
+
+		return max.key as sortKey;
+	};
+
+	const updateSort = (key: sortKey) => {
+		console.table(sort);
+		const newSort: Sort = { ...sort };
+		// * On récupère la priorite de key dans sort
+		// console.log(key);
+		// console.table(newSort);
+		// console.log(sort[getMainSortKey()].priority);
+		// * On lui attribue la valeure maximale + 1 pour qu'elle passe devant tous les autres sans modifier l'ordre des autres clés
+		newSort[key].priority = sort[getMainSortKey()].priority + 1;
+		console.table(newSort);
+		setSort(newSort);
+		// console.table(sort);
+	};
+
 	return (
 		<main className="App mt-3 m-5">
 			<TaskAddForm onSubmit={addTask} />
 
-			<div className="row">
+			<div
+				id="sortFilterContainer"
+				className="row m-3 border p-3 rounded"
+			>
 				<FilterForm query={query} updateQuery={updateQuery} />
+				<SortForm sortKey={getMainSortKey()} updateSort={updateSort} />
 			</div>
 
 			{query.length > 0 && (

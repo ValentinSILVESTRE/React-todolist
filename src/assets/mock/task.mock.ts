@@ -5,11 +5,27 @@ import { taskStatus } from '../models/taskStatus.model';
 
 // * Création de quelques tâches avec un id aléatoire
 
-const taskCount = 10;
+const taskCount = 20;
 const taskStatusCount = 2;
 const priorityCount = 3;
 
 const MockTasks: TaskModel[] = [];
+// const MockTasks: TaskModel[] = [
+// 	{
+// 		id: 'a',
+// 		title: 'a',
+// 		status: taskStatus.done,
+// 		deadline: new Date(2000, 1, 1),
+// 		priority: Priority.low,
+// 	},
+// 	{
+// 		id: 'b',
+// 		title: 'a',
+// 		status: taskStatus.todo,
+// 		deadline: new Date(2000, 1, 1),
+// 		priority: Priority.high,
+// 	},
+// ];
 
 for (let i = 0; i < taskCount; i++) {
 	const id = crypto.randomUUID(),
@@ -18,7 +34,7 @@ for (let i = 0; i < taskCount; i++) {
 			Object.values(taskStatus)[getRandomInt(taskStatusCount - 1)],
 		/** Une date aléatoire allant d'aujourd'hui jusqu'à dans 50 jours */
 		deadline: Date = new Date(
-			new Date().valueOf() + 1000 * 3600 * 24 * getRandomInt(50)
+			new Date().valueOf() + 1000 * 3600 * 24 * getRandomInt(4)
 		),
 		priority: Priority =
 			Object.values(Priority)[getRandomInt(priorityCount - 1)];
