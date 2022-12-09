@@ -4,6 +4,7 @@ import Sort from './assets/models/sort.model';
 import { TaskModel } from './assets/models/task.model';
 import { taskStatus } from './assets/models/taskStatus.model';
 import './assets/styles/App.css';
+import FilterForm from './components/FilterForm';
 import SortForm from './components/SortForm';
 import Order from './components/SortForm';
 import TaskAddForm from './components/TaskAddForm';
@@ -41,13 +42,15 @@ const defaultSort: Sort = {
 	title: { order: 'asc', priority: 2 },
 	status: { order: 'asc', priority: 1 },
 };
+const defaultQuery = '';
 
 function App() {
 	const [sort, setSort] = useState(defaultSort);
 	const [taskList, setTaskList] = useState(MockTasks);
+	const [query, setQuery] = useState(defaultQuery);
 
 	useEffect(() => {
-		console.log('UseEffect');
+		// console.log('UseEffect');
 		// * On tri la liste des tâches
 		const sortEntries = Object.entries(sort);
 		// setTaskList(taskList.sort((t1, t2) => taskIsBefore(t1, t2, sort)));
@@ -60,11 +63,19 @@ function App() {
 			}
 		);
 
-		console.table(sortedKeyList);
+		// console.table(sortedKeyList);
 
 		// todo
 		// * 1) Trier les tâches par "key" de sortedKeyList dans l'ordre "order" de la première à la dernière si égalité
 	});
+
+	// * Modification de la liste des tâches quand la query est modifiée
+	useEffect(() => {
+		const filteredTasks = MockTasks.filter((task) =>
+			task.title.includes(query)
+		);
+		setTaskList(filteredTasks);
+	}, [query]);
 
 	const addTask = (newTask: TaskModel) => {
 		// Si l'id de la nouvelle tâche est inconnu, alors on l'ajoute
@@ -107,9 +118,24 @@ function App() {
 			.length;
 	};
 
+	const updateQuery = (newQuery: string) => {
+		setQuery(newQuery);
+	};
+
 	return (
 		<main className="App mt-3 m-5">
 			<TaskAddForm onSubmit={addTask} />
+
+			<div className="row">
+				<FilterForm query={query} updateQuery={updateQuery} />
+			</div>
+
+			{query.length > 0 && (
+				<p>
+					{taskList.length || 'No'} corresponding {query} task
+					{taskList.length !== 1 && 's'} found
+				</p>
+			)}
 
 			<h2>
 				{todoTaskCount() || 'No'} task{todoTaskCount() !== 1 && 's'} to

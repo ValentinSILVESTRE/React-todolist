@@ -19,7 +19,6 @@ export default function EditTask(props: IEditTaskProps) {
 	};
 
 	const updateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log(12);
 		const title = e.target.value;
 		setTask({ ...task, title });
 	};
